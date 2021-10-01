@@ -1,140 +1,143 @@
 {
-	"menu": {
-		"home": "Hogar",
-		"about": "Sobre",
-		"set_auth0": "Establecer Auth0",
-		"profile": "Perfil"
-	},
-	"home": {
-		"accounts": {
-			"title": "Autenticación de usuario con Auth0",
-			"text_1": "Auth0 Universal Login y meteor-accounts !!",
-			"text_2": "¿Quieres ver auth0 y meteor-accounts en acción? haga clic en \"Establecer Auth0 !!\" en esta tarjeta.",
-			"text_3": "¿Quieres ver auth0 y meteor-accounts en acción? haga clic en \"Iniciar sesión !!\" en esta tarjeta.",
-			"text_4": "¿Quieres ver auth0 y meteor-accounts en acción? implementar mongol \"ctrl + m\". Ahora puede usar Meteor.user () y Meteor.userId () en el lado del cliente y del servidor.",
-			"text_5": "Consulte la página de perfil.",
-			"go_to_profile": "Ir al perfil"
-		},
-		"installed": {
-			"title": "Meteor and vuetify are now installed!!",
-			"text_1": "Este es un ejemplo de v-card de vuetify",
-			"text_2": "¿Quiere ver la suscripción en tiempo real de Meteor en acción? Ábrame en otra pestaña y haga clic en \"¡¡HAGA CLIC EN MÍ !!\" en esta tarjeta.",
-			"times_clicked": "Tiempos en los que se hizo clic:",
-			"click_me": "¡¡Haz click en mi!!"
-		},
-		"i18n": {
-			"title": "Internacionalización (i18n)",
-			"text_1": "¿Quiere ver la internacionalización en acción? Seleccione su idioma a continuación."
-		},
-		"plugins": {
-			"title": "Gestión de estado y enrutador de página",
-			"see_in_action": "¿Quiere ver VueRouter y Vuex en acción? Haga clic en \"¡Cambiar ruta!\" en esta tarjeta y observe las migas de pan de arriba.",
-			"change_route": "Cambiar ruta !!"
-		},
-		"confirm": {
-			"title": "EventBus y cuadros de diálogo de confirmación personalizados",
-			"text_1": "Escuche eventos en el DOM con EventBus.",
-			"text_2": "Want to see EventBus and Confirm Dialogs in action? click on \"Show!!\" on this card.",
-			"show": "¡¡Show!!"
-		},
-		"snack": {
-			"title": "Notificaciones con SnackBar",
-			"text_1": "Vuetify Snackbars son excelentes para las notificaciones de los usuarios.",
-			"text_2": "¿Quieres ver SnackBars en acción? Haga clic en los botones \"Mostrar\" de esta tarjeta.",
-			"show": "¡¡Show!!",
-			"oh_yeah": "¡Oh sí!",
-			"oh_no": "¡Oh, no!"
-		}
-	},
-	"about": {
-		"title": "Este es un ejemplo, para que pueda ver una pequeña parte de lo que pueden hacer vue-router y vuex.",
-		"li_1": "Haga clic en el botón Atrás en su navegador. Ese es el modo de historial del enrutador Vue.",
-		"li_2": "Open Left Navigation Drawer and go to home page.",
-		"li_3": "Utilice las migas de pan de arriba para navegar. Almacenamos migas de pan a nivel mundial usando vuex. Puede usar Vuex para almacenar cualquier cosa en un ámbito global."
-	},
-	"rules": {
-		"not_empty": "No puede estar vacío",
-		"incorrect_amount": "Cantidad incorrecta",
-		"must_be_a_number": "El campo debe ser un número",
-		"required": "Campo requerido"
-	},
-	"hello": "¡Hola i18n en SFC!",
-	"welcome": "Welcome!",
-	"buttons": {
-		"yes": "sí",
-		"no": "No",
-		"cancel": "Cancelar",
-		"update": "Actualizar",
-		"delete": "Delete",
-		"save": "Ahorrar",
-		"continue": "Continuar"
-	},
-	"navigation": {
-		"home": "Hogar",
-		"profile": "Perfil",
-		"about": "Sobre",
-		"users": "Usuarios y permisos",
-		"setupAuth0": "Setup Auth0",
-		"logs": "Registros",
-		"items": "Todos los artículos"
-	},
-	"auth": {
-		"login": "Acceso",
-		"logout": "Cerrar sesión",
-		"register": "Registrarse",
-		"profile": "Perfil",
-		"username": "Nombre de usuario",
-		"firstname": "Primer nombre",
-		"lastname": "Last Name",
-		"password": "Contraseña",
-		"password2": "Confirm Password",
-		"email": "Dirección de correo electrónico",
-		"userid": "User Id",
-		"errors": {
-			"firstnameRequired": "Se requiere el primer nombre",
-			"lastnameRequired": "Last name is required",
-			"emailRequired": "Se requiere una dirección de correo electrónico adecuada",
-			"passwordRequired": "se requiere contraseña",
-			"passwordsDontMatch": "Your passwords do not match",
-			"lessthan10chars": "Debe tener menos de 10 caracteres",
-			"invalidForm": "Please fill out the form appropriately",
-			"login": {
-				"403": "Contraseña incorrecta"
-			},
-			"registration": {
-				"403": "Este nombre de usuario ya existe"
-			},
-			"verification": {
-				"403": "Este enlace de verificación ha caducado"
-			}
-		},
-		"users": "Users",
-		"roles": "Permisos / Roles",
-		"roleName": "Nombre de rol",
-		"inheritedRoles": "Permisos / roles heredados",
-		"userRemoved": "Usuario eliminado",
-		"removeUser": "Remove User",
-		"removeUserForSure": "¿Está seguro de que desea eliminar a este usuario?",
-		"editUser": "Edit User",
-		"userSaved": "Usuario guardado",
-		"roleSaved": "Rol guardado",
-		"resetPassword": "Reset your password",
-		"resetPasswordMsg": "Se le enviará un correo electrónico. Haga clic en el enlace del correo electrónico para cambiar su contraseña.",
-		"emailFinishValidation": "Finish email validation",
-		"emailVerified": "Verificado!",
-		"emailVerifiedMessage": "You have successfully verified your email address",
-		"emailClickToVerify": "Haga clic para completar la verificación"
-	},
-	"locale": {
-		"language": "Idioma"
-	},
-	"tables": {
-		"actions": "Actions"
-	},
-	"profile": {
-		"identity": "Identidad",
-		"first_name": "First Name",
-		"last_name": "Apellido",
-		"updated_profile": "Perfil actualizado"
-	}
+  "menu": {
+    "home": "Hogar",
+    "about": "Sobre",
+    "set_auth0": "Establecer Auth0",
+    "profile": "Perfil"
+  },
+  "home": {
+    "accounts": {
+      "title": "Autenticación de usuario con Auth0",
+      "text_1": "Auth0 Universal Login y meteor-accounts !!",
+      "text_2": "¿Quieres ver auth0 y meteor-accounts en acción? haga clic en \"Establecer Auth0 !!\" en esta tarjeta.",
+      "text_3": "¿Quieres ver auth0 y meteor-accounts en acción? haga clic en \"Iniciar sesión !!\" en esta tarjeta.",
+      "text_4": "¿Quieres ver auth0 y meteor-accounts en acción? implementar mongol \"ctrl + m\". Ahora puede usar Meteor.user () y Meteor.userId () en el lado del cliente y del servidor.",
+      "text_5": "Consulte la página de perfil.",
+      "go_to_profile": "Ir al perfil"
+    },
+    "installed": {
+      "title": "¡¡Meteor y vuetify ya están instalados !!",
+      "text_1": "Este es un ejemplo de v-card de vuetify",
+      "text_2": "¿Quiere ver la suscripción en tiempo real de Meteor en acción? Ábrame en otra pestaña y haga clic en \"¡¡HAGA CLIC EN MÍ !!\" en esta tarjeta.",
+      "times_clicked": "Tiempos en los que se hizo clic:",
+      "click_me": "¡¡Haz click en mi!!"
+    },
+    "i18n": {
+      "title": "Internacionalización (i18n)",
+      "text_1": "¿Quiere ver la internacionalización en acción? Seleccione su idioma a continuación."
+    },
+    "plugins": {
+      "title": "Gestión de estado y enrutador de página",
+      "see_in_action": "¿Quiere ver VueRouter y Vuex en acción? Haga clic en \"¡Cambiar ruta!\" en esta tarjeta y observe las migas de pan de arriba.",
+      "change_route": "Cambiar ruta !!"
+    },
+    "confirm": {
+      "title": "EventBus y cuadros de diálogo de confirmación personalizados",
+      "text_1": "Escuche eventos en el DOM con EventBus.",
+      "text_2": "¿Quiere ver EventBus y Confirm Dialogs en acción? haga clic en \"Mostrar !!\" en esta tarjeta.",
+      "show": "¡¡Show!!"
+    },
+    "snack": {
+      "title": "Notificaciones con SnackBar",
+      "text_1": "Vuetify Snackbars son excelentes para las notificaciones de los usuarios.",
+      "text_2": "¿Quieres ver SnackBars en acción? Haga clic en los botones \"Mostrar\" de esta tarjeta.",
+      "show": "¡¡Show!!",
+      "oh_yeah": "¡Oh sí!",
+      "oh_no": "¡Oh, no!"
+    }
+  },
+  "about": {
+    "title": "Este es un ejemplo, para que pueda ver una pequeña parte de lo que pueden hacer vue-router y vuex.",
+    "li_1": "Haga clic en el botón Atrás en su navegador. Ese es el modo de historial del enrutador Vue.",
+    "li_2": "Abra el cajón de navegación izquierdo y vaya a la página de inicio.",
+    "li_3": "Utilice las migas de pan de arriba para navegar. Almacenamos migas de pan a nivel mundial usando vuex. Puede usar Vuex para almacenar cualquier cosa en un ámbito global."
+  },
+  "rules": {
+    "not_empty": "No puede estar vacío",
+    "incorrect_amount": "Cantidad incorrecta",
+    "must_be_a_number": "El campo debe ser un número",
+    "required": "Campo requerido"
+  },
+  "hello": "¡Hola i18n en SFC!",
+  "welcome": "¡Bienvenido!",
+  "buttons": {
+    "yes": "sí",
+    "no": "No",
+    "cancel": "Cancelar",
+    "update": "Actualizar",
+    "delete": "Borrar",
+    "save": "Ahorrar",
+    "continue": "Continuar"
+  },
+  "navigation": {
+    "home": "Hogar",
+    "profile": "Perfil",
+    "about": "Sobre",
+    "users": "Usuarios y permisos",
+    "setupAuth0": "Configurar Auth0",
+    "logs": "Registros",
+    "items": "Todos los artículos"
+  },
+  "auth": {
+    "login": "Acceso",
+    "logout": "Cerrar sesión",
+    "register": "Registrarse",
+    "profile": "Perfil",
+    "username": "Nombre de usuario",
+    "firstname": "Primer nombre",
+    "lastname": "Apellido",
+    "password": "Contraseña",
+    "password2": "confirmar Contraseña",
+    "email": "Dirección de correo electrónico",
+    "userid": "ID de usuario",
+    "errors": {
+      "firstnameRequired": "Se requiere el primer nombre",
+      "lastnameRequired": "Se requiere apellido",
+      "emailRequired": "Se requiere una dirección de correo electrónico adecuada",
+      "passwordRequired": "se requiere contraseña",
+      "passwordsDontMatch": "Tus contraseñas no coinciden",
+      "lessthan10chars": "Debe tener menos de 10 caracteres",
+      "invalidForm": "Por favor complete el formulario apropiadamente",
+      "login": {
+        "403": "Contraseña incorrecta"
+      },
+      "registration": {
+        "403": "Este nombre de usuario ya existe"
+      },
+      "verification": {
+        "403": "Este enlace de verificación ha caducado",
+        "errorTitle": "Se produjo un error con la validación del correo electrónico.",
+        "errorText": "Verifique el enlace o envíe una nueva solicitud de validación a continuación.",
+        "requestValidationEmail": "Para reenviar su correo electrónico de validación, ingrese su dirección de correo electrónico a continuación y haga clic en el botón enviar."
+      }
+    },
+    "users": "Usuarios",
+    "roles": "Permisos / Roles",
+    "roleName": "Nombre de rol",
+    "inheritedRoles": "Permisos / roles heredados",
+    "userRemoved": "Usuario eliminado",
+    "removeUser": "Eliminar usuario",
+    "removeUserForSure": "¿Está seguro de que desea eliminar a este usuario?",
+    "editUser": "editar usuario",
+    "userSaved": "Usuario guardado",
+    "roleSaved": "Rol guardado",
+    "resetPassword": "Restablecer su contraseña",
+    "resetPasswordMsg": "Se le enviará un correo electrónico. Haga clic en el enlace del correo electrónico para cambiar su contraseña.",
+    "emailFinishValidation": "Finalizar validación",
+    "emailVerified": "Verificado",
+    "emailVerifiedMessage": "Ha verificado correctamente su dirección de correo electrónico",
+    "emailClickToVerify": "Haga clic para completar la verificación"
+  },
+  "locale": {
+    "language": "Idioma"
+  },
+  "tables": {
+    "actions": "Comportamiento"
+  },
+  "profile": {
+    "identity": "Identidad",
+    "first_name": "Primer nombre",
+    "last_name": "Apellido",
+    "updated_profile": "Perfil actualizado"
+  }
 }
