@@ -51,8 +51,10 @@ function createApp () {
         }
       },
       created(){
-        // Initialize Auth0
-        this.$store.dispatch("initializeAuth0")
+        if (Meteor.settings.public.allowAuth0) {
+          // Initialize Auth0
+          this.$store.dispatch("initializeAuth0")
+        }
       },
       render: h => h(App),
     }).$mount('#app'),
