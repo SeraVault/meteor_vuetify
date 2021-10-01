@@ -23,6 +23,8 @@ import './login/registerLoginHandler'
 
 import './auth/meteor-accounts'
 
+/*-------- Seravault --------------*/
+import './seravault'
 
 /*--------  SSR  --------*/
 
