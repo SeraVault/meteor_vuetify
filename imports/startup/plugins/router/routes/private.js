@@ -20,6 +20,10 @@
 const Profile= ()=> import ('../../../../ui/pages/profile/Profile.vue') // Dynamic async import
 // import Profile from '../../../../ui/pages/profile/Profile.vue' // Use this in order to enable mongol
 
+/*SERAVAULT BEGIN*/
+const ItemList=()=> import('../../../../ui/pages/items/List.vue')
+const ItemEdit=()=> import('../../../../ui/pages/items/Edit.vue')
+/*SERAVAULT END*/
 
 /*= End of Imports =*/
 /*=============================================<<<<<*/
@@ -30,10 +34,29 @@ const routes = [
     path:"/profile",
     name:"profile",
     meta: {
-      layout:"AppBarLayout"
+      layout:"SideBarLayout"
     },
     component:Profile
   },
+  /*SERAVAULT BEGIN*/
+  {
+    path:"/items",
+    name:"itemList",
+    meta: {
+      layout:"SideBarLayout"
+    },
+    component: ItemList
+  },
+  {
+    path:"/items/edit",
+    name:"itemEdit",
+    meta: {
+      layout:"SideBarLayout"
+    },
+    component: ItemEdit
+  },
+
+  /*SERAVAULT END*/
 ]
 
 export default routes.map(

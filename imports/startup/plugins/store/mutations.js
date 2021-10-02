@@ -102,6 +102,12 @@ export const setMeteorAuthDialog = (state, val) => {
   state.authentication.meteor.showAuthDialog = val;
 }
 
+/*SERAVAULT BEGIN*/
+export const setPrivateKey = (state, val) => {
+  state.privateKey = val
+}
+/*SERAVAULT END*/
+
 
 /*= End of Mutations =*/
 /*=============================================<<<<<*/

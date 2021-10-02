@@ -124,6 +124,13 @@
 </template>
 
 <script lang="js">
+
+/*SERAVAULT START*/
+if (Meteor.isClient) {
+  import sv from '../../../mixins/seravault/encryption'
+}
+/*SERAVAULT END*/
+
 export default {
   name: "meteor-auth-dialog",
   data() {
@@ -201,13 +208,25 @@ export default {
               language: vm.$store.state.language
             }
           },
-          function(error, other, other2) {
+          async function(error, other, other2) {
             if (error) {
               vm.$store.commit("snack", {
                 text: vm.$i18n.t(`auth.errors.registration.${error.error}`),
                 color: "error"
               });
             } else {
+              if (Meteor.isClient) {
+                //setup cryptography
+                var name = "";
+                if (vm.useDisplayName) {
+                  name = vm.displayName;
+                } else {
+                  name = vm.firstName + " " + vm.lastName;
+                }
+                const privateKey = await sv.initUser(Meteor.userId(), vm.password, name);
+
+                vm.$store.commit('setPrivateKey', privateKey)              
+              }
               vm.$store.commit("setMeteorAuthDialog", false);
             }
           }

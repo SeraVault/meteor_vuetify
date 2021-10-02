@@ -94,6 +94,11 @@ export default {
           to: {name:"profile"},
           title: this.profile.name || this.profile.firstName + " " + this.profile.lastName || this.profile.email || this.profile.emails[0].address
         })
+        links.push({
+          title: "Items",
+          icon: "mdi-folder",
+          to: {name: "itemList"}
+        })
       }
       links = [
         ...links,

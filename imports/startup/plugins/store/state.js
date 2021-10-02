@@ -5,7 +5,7 @@
  */
 
 
-const state = {
+var state = {
   loading : false,
   snack : {
     active:false,
@@ -29,5 +29,9 @@ const state = {
     }
   }
 }
+
+/*SERAVAULT BEGIN*/
+state['privateKey'] = null
+/*SERAVAULT END*/
 
 export default state
