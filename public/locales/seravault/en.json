@@ -1,3 +1,5 @@
 {
-  "Items": "Items"
+  "Items": "Items",
+  "addItem": "Add Item",
+  "editItem": "Edit Item"
 }

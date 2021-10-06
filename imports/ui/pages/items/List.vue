@@ -2,8 +2,7 @@
   <div>
     <v-row>
       <v-col>
-        <v-card class="pa-2" v-for="item in decryptedItems" v-bind:key="item._id">
-          {{item}}
+        <v-card class="pa-2" v-for="item in decryptedItems" v-bind:key="item._id">          
           <div v-if="isObject(item.contents)">
             <v-card-title>{{ item.contents.title }}</v-card-title>
             <v-card-text>{{ item.contents.message}}</v-card-text>
@@ -20,7 +19,7 @@
       </v-col>
     </v-row>
     <v-fab-transition>
-      <v-btn color="error" fab dark large absolute bottom right @click="add">
+      <v-btn color="error" fab dark fixed large bottom right @click="add">
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-fab-transition>
@@ -55,17 +54,13 @@ export default {
   meteor: {
     userId() {
       return Meteor.userId;
-    },
-    $subscribe: {
-      "items.get.all": []
-    },
+    },    
     decryptedItems() {
       var encryptedItems = Items.find();  
       var decryptedItems = []
       encryptedItems.forEach(async item => {
         console.log(item)
-        decryptedItems.push(await sv.decryptItem(item, this.$store.state.privateKey))
-        
+        decryptedItems.push(await sv.decryptItem(item, this.$store.state.privateKey))        
       })          
       return decryptedItems
     }    

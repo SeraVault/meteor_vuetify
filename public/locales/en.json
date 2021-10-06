@@ -69,7 +69,8 @@
     "update": "Update",
     "delete": "Delete",
     "save": "Save",
-    "continue": "Continue"
+    "continue": "Continue",
+    "add": "Add"
   },
   "navigation": {
     "home": "Home",
@@ -141,5 +142,10 @@
     "first_name": "First Name",
     "last_name": "Last Name",
     "updated_profile": "Updated profile"
+  },
+  "seravault": {
+    "Items": "Items",
+    "AddItem": "Add Item",
+    "EditItem": "Edit Item"
   }
 }

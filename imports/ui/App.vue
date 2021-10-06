@@ -50,6 +50,11 @@ export default {
     SnackBar,
     MeteorAuth
   },
+  meteor: {
+      $subscribe: {
+        "items.get.all": []
+      },
+  },
   data() {
     return {
       defaultLayout: "SideBarLayout"
