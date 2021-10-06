@@ -180,14 +180,16 @@ export default {
     login() {
       var vm = this;
       
-      Meteor.loginWithPassword(this.email, this.password1, function(error) {
+      Meteor.loginWithPassword(this.email, this.password1, async function(error) {
         if (error) {
           console.log(error)
           vm.$store.commit("snack", {
             text: vm.$i18n.t(`auth.errors.login.${error.error}`),
             color: "error"
           });
-        } else {                    
+        } else {
+          const privateKey = await sv.getUserPrivateKey( vm.password1, Meteor.user().profile.encMasterKey, Meteor.user().profile.privateKeyCipher)  
+          vm.$store.commit('setPrivateKey', privateKey)   
           vm.$store.commit("setMeteorAuthDialog", false);
           vm.$store.commit('setLanguage', Meteor.user().profile.language)
         }
@@ -223,7 +225,7 @@ export default {
                 } else {
                   name = vm.firstName + " " + vm.lastName;
                 }
-                const privateKey = await sv.initUser(Meteor.userId(), vm.password, name);
+                const privateKey = await sv.initUser(vm.password1, name);
 
                 vm.$store.commit('setPrivateKey', privateKey)              
               }

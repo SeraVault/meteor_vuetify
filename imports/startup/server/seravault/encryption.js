@@ -1,5 +1,5 @@
 Meteor.methods({
-  storeKeys: function (privateKeyCipher, publicKey, salt, iv, passwordBytes, sharingCode, plan, language, displayName) {
+  storeKeys: function (privateKeyCipher, publicKey, encMasterKey, sharingCode, plan, displayName) {
     var diskSize = 0;
     switch(plan) {
       case 'free':
@@ -13,12 +13,9 @@ Meteor.methods({
       $set: {
         'profile.privateKeyCipher': privateKeyCipher,        
         'profile.publicKey': publicKey,
-        'profile.salt': salt,
-        'profile.iv': iv,
-        'profile.passwordBytes': passwordBytes,
+        'profile.encMasterKey': encMasterKey,       
         'profile.sharing_code': sharingCode,
         'profile.disk_size': diskSize,
-        'profile.language': language,
         'profile.displayName': displayName
       }
     });

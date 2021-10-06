@@ -125,7 +125,8 @@ export const logout = async({state, commit}) => {
   }
   if (Meteor.settings.public.authentication.allowMeteor && Meteor.settings.public.authentication.defaultProvider.toLowerCase() == "meteor") {    
     Meteor.logout()
-    router.push("/")
+    state = {}
+    //router.push("/")
     
   }
 }

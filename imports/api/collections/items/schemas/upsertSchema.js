@@ -39,11 +39,27 @@ export default {
   /*--------  Custom props  --------*/
   
    /*SERAVAULT BEGIN*/
-   contents: {
+  contents: {
     type: Object,
     blackbox: true,
     optional: true
+  },
+  keys: {
+    type: Array,
+    blackbox: true
+  },
+  'keys.$': {
+    type: Object,
+    blackbox: true
+  },
+  recipients: {
+    type: Array
+  },
+  'recipients.$': {
+    type: String
   }
+
+  
   /*SERAVAULT END*/
   
 }

@@ -2,18 +2,20 @@
   <div>
     <v-row>
       <v-col>
-        <v-card class="pa-2" v-for="item in items" v-bind:key="item._id">
+        <v-card class="pa-2" v-for="item in decryptedItems" v-bind:key="item._id">
+          {{item}}
           <div v-if="isObject(item.contents)">
-          <v-card-title>{{ item.contents.title }}</v-card-title>
-          <v-card-text>{{ item.contents}}</v-card-text>
-          
+            <v-card-title>{{ item.contents.title }}</v-card-title>
+            <v-card-text>{{ item.contents.message}}</v-card-text>
           </div>
           <div v-if="!isObject(item.contents)">
             <v-card-text>
             {{item.contents}}
             </v-card-text>
             </div>
-          <v-card-actions></v-card-actions>
+          <v-card-actions>
+            <v-btn @click="open(item._id)">Edit</v-btn>
+          </v-card-actions>
         </v-card>
       </v-col>
     </v-row>
@@ -25,7 +27,7 @@
   </div>
 </template>
 <script lang="js">
-import encryption from '../../mixins/seravault/encryption'
+import sv from '../../mixins/seravault/encryption'
 import { Items } from '../../../api/collections/items/_client'
 
 export default {
@@ -35,14 +37,20 @@ export default {
       message: null
     };
   },
-  methods: {
-    ...encryption,
+  methods: {    
     add: function() {
       this.$router.push({ name: "itemEdit" });
     },
     isObject: function(obj) {
       return obj !== undefined && obj !== null && obj.constructor == Object;
-    }
+    },
+    open: function(id) {
+      this.$router.push({ name: 'itemEdit', params: { _id: id } })
+    },
+    
+  },
+  computed: {
+    
   },
   meteor: {
     userId() {
@@ -51,11 +59,16 @@ export default {
     $subscribe: {
       "items.get.all": []
     },
-    items() {
-      var items = Items.find();
-      return items;
-      return items.forEach(item => this.decryptItemAES(item, this.$store.state.privateKey))
-    }
+    decryptedItems() {
+      var encryptedItems = Items.find();  
+      var decryptedItems = []
+      encryptedItems.forEach(async item => {
+        console.log(item)
+        decryptedItems.push(await sv.decryptItem(item, this.$store.state.privateKey))
+        
+      })          
+      return decryptedItems
+    }    
   }
 };
 </script>

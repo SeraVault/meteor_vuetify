@@ -48,7 +48,7 @@ const routes = [
     component: ItemList
   },
   {
-    path:"/items/edit",
+    path:"/items/edit/:_id?",
     name:"itemEdit",
     meta: {
       layout:"SideBarLayout"
