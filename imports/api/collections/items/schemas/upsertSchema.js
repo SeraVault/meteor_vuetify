@@ -5,6 +5,10 @@
  *
  */
 
+/*SERAVAULT BEGIN*/
+
+/*SERAVAULT END*/
+
 export default {
   
   /*--------  Default Props  --------*/
@@ -41,14 +45,18 @@ export default {
    /*SERAVAULT BEGIN*/
   contents: {
     type: Object,
-    blackbox: true,
-    optional: true
-  },
-  keys: {
-    type: Array,
     blackbox: true
   },
+  keys: {
+    type: Array
+  },
   'keys.$': {
+    type: Object
+  },
+  'keys.$.userId': {
+    type: String
+  },
+  'keys.$.key': {
     type: Object,
     blackbox: true
   },

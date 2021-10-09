@@ -18,13 +18,13 @@ shell-server@0.5.0            # Server-side component of the `meteor shell` comm
 
 tracker@1.2.0                 # Dependency tracker to allow reactive callbacks
 static-html                   # Define static page content in .html files
+akryum:vue-sass
 akryum:vue-component
 
 meteortesting:mocha               # A package for writing and running your meteor app and package tests with mocha
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
-akryum:vue-sass
+
 hwillson:stub-collections
-msavin:mongol
 jquery
 accounts-base@1.9.0
 zer0th:meteor-vuetify-loader
@@ -36,3 +36,4 @@ dburles:factory
 akryum:vue-ssr
 ostrio:meteor-root
 accounts-password
+msavin:mongol

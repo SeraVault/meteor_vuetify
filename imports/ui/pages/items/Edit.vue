@@ -45,9 +45,13 @@
     },
     methods: {
       async save() {
-        var item = this.item           
-        item = await sv.encryptItem(item, this.$store.state.privateKey)             
-        Meteor.call('items.upsert', item)        
+        var item = this.item        
+        var user = Meteor.user()
+        var contacts = [{userId: user._id, publicKey: user.profile.publicKey}]       
+        itemEncrypted = await sv.encryptItem(item, contacts)    
+        console.log('save:', itemEncrypted)         
+        Meteor.call('items.upsert', itemEncrypted)        
+        
       }
     },
     created: async function() {      

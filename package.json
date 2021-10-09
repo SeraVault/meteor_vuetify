@@ -28,7 +28,7 @@
     "@mdi/font": "^5.9.55",
     "browserslist": "^4.16.3",
     "chance": "^1.1.8",
-    "easy-web-crypto": "^1.2.9",
+    "easy-web-crypto": "file:../easy-web-crypto",
     "ignore-styles": "^5.0.1",
     "lodash": "^4.17.20",
     "luxon": "^1.25.0",

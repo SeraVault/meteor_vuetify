@@ -13,7 +13,7 @@
             </v-card-text>
             </div>
           <v-card-actions>
-            <v-btn @click="open(item._id)">Edit</v-btn>
+            <v-btn @click="edit(item._id)">Edit</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -43,7 +43,7 @@ export default {
     isObject: function(obj) {
       return obj !== undefined && obj !== null && obj.constructor == Object;
     },
-    open: function(id) {
+    edit: function(id) {
       this.$router.push({ name: 'itemEdit', params: { _id: id } })
     },
     
