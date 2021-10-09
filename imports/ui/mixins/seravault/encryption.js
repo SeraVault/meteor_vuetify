@@ -70,8 +70,10 @@ const svEnc = {
 
   async encryptItem(item, contacts) {    
     const key = await WebCrypto.genAESKey(extractable = true, mode = 'AES-GCM', keySize = 256)    
-    const exportedKey = await WebCrypto.exportKey(key)        
+    const exportedKey = await WebCrypto.exportKey(key)  
+    console.log(item.contents)      
     item.contents = await WebCrypto.encrypt(key, item.contents)
+    console.log(item.contents)
     item.recipients = [Meteor.userId()]
     
     var keys = []

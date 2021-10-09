@@ -2,8 +2,8 @@
   <v-card>
     <v-card-title>{{ title }}</v-card-title>
     <v-card-text>
-      <v-text-field label="Title" v-model="item.contents.title" v-if="item.contents"/>
-      <v-textarea label="Content" v-model="item.contents.message" v-if="item.contents"/>
+      <v-text-field label="Title" v-model="item.contents.title"/>
+      <v-textarea label="Content" v-model="item.contents.message"/>
 
     </v-card-text>
     <v-card-actions>
@@ -24,7 +24,7 @@
       };
     },
     meteor: {      
-      async item() {
+      async loadItem() {
           if (this.$route.params._id){        
             var encryptedItem = Items.findOne(this.$route.params._id)            
             if (encryptedItem) {
@@ -33,11 +33,11 @@
             this.title = this.$i18n.t('seravault.EditItem')
             this.buttonSave = this.$i18n.t('buttons.update')
           } else {
-            this.item = {}
-            this.item.contents = {
+            
+            this.item = {contents : {
               title: null,
               message: null      
-            }
+            }}
             this.title = this.$i18n.t('seravault.AddItem')
             this.buttonSave = this.$i18n.t('buttons.add')
           }
@@ -45,7 +45,7 @@
     },
     methods: {
       async save() {
-        var item = this.item        
+        var item = this.item               
         var user = Meteor.user()
         var contacts = [{userId: user._id, publicKey: user.profile.publicKey}]       
         itemEncrypted = await sv.encryptItem(item, contacts)    
@@ -54,7 +54,8 @@
         
       }
     },
-    created: async function() {      
+    created: async function() {    
+      
     }
   }
 </script>
