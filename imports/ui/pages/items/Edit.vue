@@ -15,6 +15,7 @@
 <script lang="js">
   import sv from '../../mixins/seravault/encryption'
   import { Items } from '../../../api/collections/items/shared'
+  import { Random } from 'meteor/random'
   export default {
     data: function() {
       return {
@@ -28,16 +29,18 @@
           if (this.$route.params._id){        
             var encryptedItem = Items.findOne(this.$route.params._id)            
             if (encryptedItem) {
-              this.item = await sv.decryptItem(encryptedItem, this.$store.state.privateKey)
+              this.item = await sv.decryptItem(encryptedItem, await this.getUserPrivateKey() )
             }
             this.title = this.$i18n.t('seravault.EditItem')
             this.buttonSave = this.$i18n.t('buttons.update')
-          } else {
-            
-            this.item = {contents : {
-              title: null,
-              message: null      
-            }}
+          } else {                 
+            this.item = {
+              _id: Random.id(),
+              contents : {
+                title: null,
+                message: null      
+              }
+            }
             this.title = this.$i18n.t('seravault.AddItem')
             this.buttonSave = this.$i18n.t('buttons.add')
           }
@@ -48,10 +51,12 @@
         var item = this.item               
         var user = Meteor.user()
         var contacts = [{userId: user._id, publicKey: user.profile.publicKey}]       
-        itemEncrypted = await sv.encryptItem(item, contacts)    
-        console.log('save:', itemEncrypted)         
-        Meteor.call('items.upsert', itemEncrypted)        
-        
+        itemEncrypted = await sv.encryptItem(item, contacts)                 
+        Meteor.call('items.upsert', itemEncrypted)          
+      },    
+      getUserPrivateKey: function() {
+        var privateKey = sv.getUserPrivateKeyObject(this.$store.state.privateKey)      
+        return privateKey
       }
     },
     created: async function() {    

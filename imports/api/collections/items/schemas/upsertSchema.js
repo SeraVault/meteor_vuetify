@@ -46,20 +46,7 @@ export default {
   contents: {
     type: Object,
     blackbox: true
-  },
-  keys: {
-    type: Array
-  },
-  'keys.$': {
-    type: Object
-  },
-  'keys.$.userId': {
-    type: String
-  },
-  'keys.$.key': {
-    type: Object,
-    blackbox: true
-  },
+  },  
   recipients: {
     type: Array
   },

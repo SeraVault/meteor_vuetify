@@ -187,10 +187,12 @@ export default {
             text: vm.$i18n.t(`auth.errors.login.${error.error}`),
             color: "error"
           });
+          vm.$store.commit("authenticated", false)
         } else {
-          const privateKey = await sv.getUserPrivateKey( vm.password1, Meteor.user().profile.encMasterKey, Meteor.user().profile.privateKeyCipher)  
-          vm.$store.commit('setPrivateKey', privateKey)   
+          const privateKey = await sv.getUserPrivateKey( vm.password1, Meteor.user().profile.encMasterKey, Meteor.user().profile.privateKeyCipher)                
+          vm.$store.commit('setPrivateKey', privateKey)
           vm.$store.commit("setMeteorAuthDialog", false);
+          vm.$store.commit("authenticated", true)
           vm.$store.commit('setLanguage', Meteor.user().profile.language)
         }
       });

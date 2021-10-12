@@ -1,7 +1,7 @@
 //import nacl from "tweetnacl";
 import Chance from "chance";
 //import svUtils from "./encryption_utils.js";
-import { Random } from 'meteor/random'
+
 import { Keys } from "../../../api/collections/keys/shared"
 import WebCrypto, { encrypt } from 'easy-web-crypto'
 
@@ -13,21 +13,14 @@ const svEnc = {
     //update user profile with encrypted keys
 
     const chance = new Chance();
-    console.log(passphrase)
+
     //Generate user's Async KeyPair
     const keyPair = await WebCrypto.genKeyPairRSA()
     const privateKey = await WebCrypto.exportPrivateKeyRSA(keyPair.privateKey);
     const publicKey = await WebCrypto.exportPublicKeyRSA(keyPair.publicKey);
-
-    console.log("privateKey", privateKey);
-    console.log("publicKey", publicKey);
-
     const encMasterKey = await WebCrypto.genEncryptedMasterKey(passphrase);    
     const masterKey = await WebCrypto.decryptMasterKey(passphrase, encMasterKey)
-    console.log(masterKey)
     const privateKeyCipher = await WebCrypto.encrypt(masterKey, privateKey)
-
-    console.log("privateKeyCipher", privateKeyCipher);
     
     var isGoodSharingCode = false;
     var sharingCode = "";
@@ -56,45 +49,41 @@ const svEnc = {
     return keyPair.privateKey;
   },
 
-  async getUserPrivateKey(passphrase, encMasterKey, privateKeyCipher) {
-    var profile = Meteor.user().profile;
-    // decrypt private key of the user using his password and nonce
-    console.log(encMasterKey)
-    console.log(privateKeyCipher)
+  async getUserPrivateKey(passphrase, encMasterKey, privateKeyCipher) {        
     const masterKey = await WebCrypto.decryptMasterKey(passphrase, encMasterKey)    
-    var privateKey = await WebCrypto.decrypt(masterKey, privateKeyCipher)      
-    privateKey = await WebCrypto.importPrivateKeyRSA(privateKey);
-    console.log(privateKey)  
-    return privateKey;
+    var privateKey = await WebCrypto.decrypt(masterKey, privateKeyCipher)   
+    return privateKey
+  },
+
+  async getUserPrivateKeyObject(privateKey) {
+    privateKeyObject = await WebCrypto.importPrivateKeyRSA(privateKey); 
+    return privateKeyObject
   },
 
   async encryptItem(item, contacts) {    
     const key = await WebCrypto.genAESKey(extractable = true, mode = 'AES-GCM', keySize = 256)    
-    const exportedKey = await WebCrypto.exportKey(key)  
-    console.log(item.contents)      
-    item.contents = await WebCrypto.encrypt(key, item.contents)
-    console.log(item.contents)
+    const exportedKey = await WebCrypto.exportKey(key)      
+    item.contents = await WebCrypto.encrypt(key, item.contents)    
     item.recipients = [Meteor.userId()]
     
-    var keys = []
     contacts.forEach(async contact => {
       const userPublicKey = await WebCrypto.importPublicKeyRSA(contact.publicKey)       
       const encryptedKey =  await WebCrypto.encryptRSA(userPublicKey, exportedKey)
-      keys.push({userId: contact.userId, key: encryptedKey })
-      
+      const data = {itemId: item._id, userId: contact.userId, key: encryptedKey }      
+      Meteor.call('keys.upsert', data )           
     })    
-    item.keys = keys
-    console.log(item)
     return item
   },
 
   async decryptItem(item, privateKey) {      
-    const keyData = item.keys.find(key => {
-      return key.userId = Meteor.userId
-    })    
-    const importedKey = await WebCrypto.importKey(keyData.key)
-      
-    item.contents = await WebCrypto.decrypt(userPublicKey, item.contents)    
+    var keyData = Keys.findOne({itemId: item._id, userId: Meteor.userId()}) 
+    const aesKey = await WebCrypto.decryptRSA(privateKey, keyData.key)
+    console.log('aesKey', aesKey)
+    //const imported = WebCrypto.import(aesKey)    
+    const importedAesKey = await WebCrypto.importKey(Object.values(aesKey))    
+    console.log(importedAesKey)
+    item.contents = await WebCrypto.decrypt(importedAesKey, item.contents) 
+    console.log('decrypt', item)   
     return item
   },
   

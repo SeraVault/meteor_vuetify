@@ -26,6 +26,7 @@
     "@babel/runtime": "^7.11.2",
     "@google-cloud/translate": "^6.2.7",
     "@mdi/font": "^5.9.55",
+    "bcrypt": "^5.0.1",
     "browserslist": "^4.16.3",
     "chance": "^1.1.8",
     "easy-web-crypto": "file:../easy-web-crypto",

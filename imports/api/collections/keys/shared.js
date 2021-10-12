@@ -30,7 +30,8 @@ Meteor.methods({
       
       const ups = Keys.upsert(
         {
-          _id: item._id
+          userId: item.userId,
+          itemId: item.itemId
         },
         item,
         {

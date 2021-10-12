@@ -52,7 +52,8 @@ export default {
   },
   meteor: {
       $subscribe: {
-        "items.get.all": []
+        "items.get.all": [],
+        "keys.get.all": []
       },
   },
   data() {

@@ -17,12 +17,14 @@
 // want to use the classic import style:
 // import SomePage from 'PagePath'
 
-const Profile= ()=> import ('../../../../ui/pages/profile/Profile.vue') // Dynamic async import
+const Profile= () => import('../../../../ui/pages/profile/Profile.vue') // Dynamic async import
 // import Profile from '../../../../ui/pages/profile/Profile.vue' // Use this in order to enable mongol
 
 /*SERAVAULT BEGIN*/
-const ItemList=()=> import('../../../../ui/pages/items/List.vue')
-const ItemEdit=()=> import('../../../../ui/pages/items/Edit.vue')
+const ItemList=() => import('../../../../ui/pages/items/List.vue')
+const ItemEdit=() => import('../../../../ui/pages/items/Edit.vue')
+
+const Testing=() =>  import('../../../../ui/pages/items/Test.vue')
 /*SERAVAULT END*/
 
 /*= End of Imports =*/
@@ -55,6 +57,14 @@ const routes = [
     },
     component: ItemEdit
   },
+  {
+    path:"/testing",
+    name:"testing",
+    meta: {
+      layout:"SideBarLayout"
+    },
+    component: Testing
+  }
 
   /*SERAVAULT END*/
 ]

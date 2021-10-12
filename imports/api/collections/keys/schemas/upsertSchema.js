@@ -38,9 +38,20 @@ export default {
 
   /*--------  Custom props  --------*/
   
-  name: {
+  /*SERAVAULT BEGIN*/
+  itemId: {
     type: String,
-    optional:true
+    optional: false
   },
+  userId: {
+    type: String,
+    optional: false
+  },
+  key: {
+    type: Object,
+    blackbox: true
+  }
+
+  /*SERAVAULT END*/
   
 }

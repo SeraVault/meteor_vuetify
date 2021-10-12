@@ -28,6 +28,7 @@
 <script lang="js">
 import sv from '../../mixins/seravault/encryption'
 import { Items } from '../../../api/collections/items/_client'
+import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -46,10 +47,13 @@ export default {
     edit: function(id) {
       this.$router.push({ name: 'itemEdit', params: { _id: id } })
     },
-    
+    getUserPrivateKey: function() {
+      var privateKey = sv.getUserPrivateKeyObject(this.$store.state.privateKey)      
+      return privateKey
+    }
   },
   computed: {
-    
+    //...mapState(['privateKey'])
   },
   meteor: {
     userId() {
@@ -58,9 +62,12 @@ export default {
     decryptedItems() {
       var encryptedItems = Items.find();  
       var decryptedItems = []
+      
       encryptedItems.forEach(async item => {
         console.log(item)
-        decryptedItems.push(await sv.decryptItem(item, this.$store.state.privateKey))        
+        console.log('privateKey', privateKey)
+        const privateKey = await sv.decryptItem(item, await this.getUserPrivateKey() )
+        decryptedItems.push( item )        
       })          
       return decryptedItems
     }    
