@@ -3,7 +3,7 @@ import Chance from "chance";
 //import svUtils from "./encryption_utils.js";
 
 import { Keys } from "../../../api/collections/keys/shared"
-import WebCrypto, { encrypt } from 'easy-web-crypto'
+import WebCrypto from 'easy-web-crypto'
 
 
 const svEnc = {
@@ -65,7 +65,6 @@ const svEnc = {
     const exportedKey = await WebCrypto.exportKey(key)      
     item.contents = await WebCrypto.encrypt(key, item.contents)    
     item.recipients = [Meteor.userId()]
-    
     contacts.forEach(async contact => {
       const userPublicKey = await WebCrypto.importPublicKeyRSA(contact.publicKey)       
       const encryptedKey =  await WebCrypto.encryptRSA(userPublicKey, exportedKey)
@@ -86,24 +85,6 @@ const svEnc = {
     console.log('decrypt', item)   
     return item
   },
-  
-  deriveSecretKey(privateKey, publicKey) {
-    return window.crypto.subtle.deriveKey(
-      {
-        name: "ECDH",
-        public: publicKey
-      },
-      privateKey,
-      {
-        name: "AES-GCM",
-        length: 256
-      },
-      false,
-      ["encrypt", "decrypt"]
-    );
-  }
-
- 
 
   /*changePassword: function(newPassword) {
     var self = this;
