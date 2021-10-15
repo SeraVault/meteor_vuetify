@@ -62,10 +62,7 @@ export default {
     decryptedItems() {
       var encryptedItems = Items.find();  
       var decryptedItems = []
-      
       encryptedItems.forEach(async item => {
-        console.log(item)
-        console.log('privateKey', privateKey)
         const privateKey = await sv.decryptItem(item, await this.getUserPrivateKey() )
         decryptedItems.push( item )        
       })          

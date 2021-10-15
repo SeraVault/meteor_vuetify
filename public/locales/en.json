@@ -1,5 +1,5 @@
 {
- 
+
   "menu": {
     "home": "Home",
     "about": "About",
@@ -93,7 +93,7 @@
     "password2": "Confirm Password",
     "email": "Email Address",
     "userid": "User Id",
-    "errors" : {
+    "errors": {
       "firstnameRequired": "First name is required",
       "lastnameRequired": "Last name is required",
       "emailRequired": "A proper email address is required",
@@ -126,9 +126,9 @@
     "roleSaved": "Role saved",
     "resetPassword": "Reset your password",
     "resetPasswordMsg": "An email will be sent to you.  Click the link in the email to change your password.",
-    "emailFinishValidation":  "Finish validation",
+    "emailFinishValidation": "Finish validation",
     "emailVerified": "Verified",
-    "emailVerifiedMessage":  "You have successfully verified your email address",
+    "emailVerifiedMessage": "You have successfully verified your email address",
     "emailClickToVerify": "Click to complete verification"
   },
   "locale": {
@@ -144,8 +144,18 @@
     "updated_profile": "Updated profile"
   },
   "seravault": {
-    "Items": "Items",
-    "AddItem": "Add Item",
-    "EditItem": "Edit Item"
+    "items": {
+      "Items": "Items",
+      "AddItem": "Add Item",
+      "EditItem": "Edit Item"
+    },
+    "profile": {
+      "changePassphrase": {
+        "wrongPassphrase": "Incorrect passphrase",
+        "oldPassphrase": "Current passphrase",
+        "newPassphrase": "New passphrase",
+        "newPassphraseRepeat": "Verify your new passphrase"
+      }
+    }
   }
 }

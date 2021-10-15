@@ -13,8 +13,6 @@ const svEnc = {
     //update user profile with encrypted keys
 
     const chance = new Chance();
-
-    //Generate user's Async KeyPair
     const keyPair = await WebCrypto.genKeyPairRSA()
     const privateKey = await WebCrypto.exportPrivateKeyRSA(keyPair.privateKey);
     const publicKey = await WebCrypto.exportPublicKeyRSA(keyPair.publicKey);
@@ -45,8 +43,8 @@ const svEnc = {
       sharingCode,
       "free",
       displayName
-    );
-    return keyPair.privateKey;
+    );    
+    return privateKey;
   },
 
   async getUserPrivateKey(passphrase, encMasterKey, privateKeyCipher) {        
@@ -77,31 +75,21 @@ const svEnc = {
   async decryptItem(item, privateKey) {      
     var keyData = Keys.findOne({itemId: item._id, userId: Meteor.userId()}) 
     const aesKey = await WebCrypto.decryptRSA(privateKey, keyData.key)
-    console.log('aesKey', aesKey)
-    //const imported = WebCrypto.import(aesKey)    
     const importedAesKey = await WebCrypto.importKey(Object.values(aesKey))    
-    console.log(importedAesKey)
     item.contents = await WebCrypto.decrypt(importedAesKey, item.contents) 
-    console.log('decrypt', item)   
     return item
   },
 
-  /*changePassword: function(newPassword) {
-    var self = this;
-    // encrypt the user's private key
-    var nonce = svUtils.generate24ByteNonce();
-    password = svUtils.generate32ByteKeyFromPassword(newPassword);
-    userPrivateKey = new Uint8Array(
-      _.values(Session.get("userKeys").privateKey)
-    );
-    var privateKey = svUtils.symEncryptWithKey(
-      userPrivateKey,
-      nonce,
-      password.byteArray
-    );
-    //store encrypted keys to user account
-    Meteor.call("updatePrivateKey", privateKey, password.randomBytes, nonce);
-  }*/
+  async changePassphrase(oldPassphrase, newPassphrase, encMasterKey) {
+    try {     
+      return await WebCrypto.updatePassphraseKey(oldPassphrase, newPassphrase, encMasterKey)      
+    }
+    catch (error) {
+      return {error: true, message: error}
+    }
+    
+    
+  }
 };
 
 export default svEnc;

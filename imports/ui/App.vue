@@ -55,6 +55,9 @@ export default {
         "items.get.all": [],
         "keys.get.all": []
       },
+      theme() {
+        return Meteor.user()?.profile.theme || false
+      }
   },
   data() {
     return {
@@ -69,10 +72,16 @@ export default {
       return this.$route.meta.layout || this.defaultLayout
     }
   },
+  watch: {    
+    theme: function (newTheme, oldTheme) {
+      this.$vuetify.theme.dark = newTheme      
+    }
+  },
   created() {
     this.$i18n.locale = Meteor.user()
-        ? Meteor.user().profile.language
+        ? Meteor.user()?.profile.language
         : this.$store.state.language;
+    this.$vuetify.theme.dark = this.theme
   }
 }
 </script>

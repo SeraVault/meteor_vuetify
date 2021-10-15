@@ -228,8 +228,9 @@ export default {
                   name = vm.firstName + " " + vm.lastName;
                 }
                 const privateKey = await sv.initUser(vm.password1, name);
-
-                vm.$store.commit('setPrivateKey', privateKey)              
+                console.log(privateKey)
+                vm.$store.commit('setPrivateKey', privateKey)    
+                vm.$store.commit("authenticated", true)          
               }
               vm.$store.commit("setMeteorAuthDialog", false);
             }

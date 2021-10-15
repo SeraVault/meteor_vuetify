@@ -97,7 +97,7 @@
     </v-tooltip>
     
     <template #extension>
-      <bread-crumbs />
+      <!--<bread-crumbs /> -->
     </template>
   </v-app-bar>
 </template>

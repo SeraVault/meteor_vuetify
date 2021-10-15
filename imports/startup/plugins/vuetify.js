@@ -22,10 +22,13 @@ Vue.use(Vuetify)
 // Translation provided by Vuetify (javascript)
 // import es from 'vuetify/es5/locale/es'
 
-
 const opts = {
   theme: {
     options: { minifyTheme },
+    themes: {
+      dark: Meteor.settings.public.theme,
+      light: Meteor.settings.public.theme
+    }
   },
   icons: {
     iconfont: 'mdi', // default - only for display purposes
