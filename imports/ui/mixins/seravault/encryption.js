@@ -73,7 +73,7 @@ const svEnc = {
   },
 
   async decryptItem(item, privateKey) {      
-    var keyData = Keys.findOne({itemId: item._id, userId: Meteor.userId()}) 
+    var keyData = Keys.findOne({itemId: item._id, userId: Meteor.userId()})    
     const aesKey = await WebCrypto.decryptRSA(privateKey, keyData.key)
     const importedAesKey = await WebCrypto.importKey(Object.values(aesKey))    
     item.contents = await WebCrypto.decrypt(importedAesKey, item.contents) 

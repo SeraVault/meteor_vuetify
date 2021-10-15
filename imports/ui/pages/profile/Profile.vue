@@ -23,7 +23,11 @@
             </v-card-actions>
           </v-card>
         </v-form>
+      </v-row>
+      <v-row>
         <LanguagePicker />
+      </v-row>
+      <v-row>
         <v-form ref="updateProfile">
           <v-card cols="6" sm="12" @keyup.native.enter="updateProfile">
             <v-card-title>
@@ -192,7 +196,8 @@
         })
       },
       async updatePassphrase() {
-        if (this.$refs.changePassphrase.validate()) {           
+        if (this.$refs.changePassphrase.validate()) {    
+            var vm = this       
             const newKey = await sv.changePassphrase(this.oldPassphrase, this.newPassphrase, this.user.profile.encMasterKey)            
             if (!newKey.error) {
               Meteor.users.update({
@@ -205,6 +210,14 @@
               Accounts.changePassword(this.oldPassphrase, this.newPassphrase, function(err) {
                 if (err) {
                   console.log(err)
+                } else {
+                  vm.$store.commit("snack", {
+                    text: vm.$t('seravault.profile.changePassphrase.passphraseChanged'),
+                    color: "success"
+                  })
+                  vm.oldPassphrase = null
+                  vm.newPassphrase = null
+                  vm.newPassphraseRepeat = null
                 }
               })
             }

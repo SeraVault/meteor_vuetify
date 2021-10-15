@@ -9,8 +9,6 @@
       v-if="showNavIcon"
       @click="$emit('togle-drawer')"
     />
-
-    <v-toolbar-title>Meteor Vuetify</v-toolbar-title>
     <v-spacer />
     <v-menu offset-y v-if="i18nShow">
         <template v-slot:activator="{ on }">
@@ -94,11 +92,8 @@
         </v-btn>
       </template>
       <span>Log in</span>
-    </v-tooltip>
-    
-    <template #extension>
-      <!--<bread-crumbs /> -->
-    </template>
+    </v-tooltip>    
+   
   </v-app-bar>
 </template>
 

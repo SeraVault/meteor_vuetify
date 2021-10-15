@@ -154,7 +154,8 @@
         "wrongPassphrase": "Incorrect passphrase",
         "oldPassphrase": "Current passphrase",
         "newPassphrase": "New passphrase",
-        "newPassphraseRepeat": "Verify your new passphrase"
+        "newPassphraseRepeat": "Verify your new passphrase",
+        "passphraseChanged": "Your passphrase has been updated"
       }
     }
   }

@@ -6,24 +6,10 @@
   >
     <v-list dense>
       <v-list-item>
-        <v-list-item-avatar>
-          <img src="/img/logo.png">
-        </v-list-item-avatar>
-
         <v-list-item-content>
-          <v-list-item-title class="subheading">
-            Meteor + Vuetify
-          </v-list-item-title>
+          <img src="/img/seravault_logo.svg">
         </v-list-item-content>
-        <v-list-item-action>
-          <v-btn
-            icon
-            small
-            @click.stop="drawer=false"
-          >
-            <v-icon>mdi-chevron-left</v-icon>
-          </v-btn>
-        </v-list-item-action>
+
       </v-list-item>
       <v-divider />
       <v-list-item
@@ -92,7 +78,7 @@ export default {
         links.push({
           avatar: this.avatar || this.profile.picture,
           to: {name:"profile"},
-          title: this.profile.name || this.profile.firstName + " " + this.profile.lastName || this.profile.email || this.profile.emails[0].address
+          title: this.profile.firstName + " " + this.profile.lastName || this.profile.email || this.profile.emails[0].address
         })
         links.push({
           title: "Items",
