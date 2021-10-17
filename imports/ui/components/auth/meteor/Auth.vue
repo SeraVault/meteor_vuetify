@@ -10,7 +10,7 @@
             {{ $t("auth.register") }}
           </v-tab>
           <v-tab>
-            {{ $t("auth.resetPassword")}}
+            {{ $t("auth.resetPassword") }}
           </v-tab>
         </v-tabs>
 
@@ -179,7 +179,7 @@ export default {
     },
     login() {
       var vm = this;
-      
+
       Meteor.loginWithPassword(this.email, this.password1, async function(error) {
         if (error) {
           console.log(error)
@@ -189,7 +189,7 @@ export default {
           });
           vm.$store.commit("authenticated", false)
         } else {
-          const privateKey = await sv.getUserPrivateKey( vm.password1, Meteor.user().profile.encMasterKey, Meteor.user().profile.privateKeyCipher)                
+          const privateKey = await sv.getUserPrivateKey( vm.password1, Meteor.user().profile.encMasterKey, Meteor.user().profile.privateKeyCipher)
           vm.$store.commit('setPrivateKey', privateKey)
           vm.$store.commit("setMeteorAuthDialog", false);
           vm.$store.commit("authenticated", true)
@@ -229,8 +229,8 @@ export default {
                 }
                 const privateKey = await sv.initUser(vm.password1, name);
                 console.log(privateKey)
-                vm.$store.commit('setPrivateKey', privateKey)    
-                vm.$store.commit("authenticated", true)          
+                vm.$store.commit('setPrivateKey', privateKey)
+                vm.$store.commit("authenticated", true)
               }
               vm.$store.commit("setMeteorAuthDialog", false);
             }

@@ -4,7 +4,7 @@
     <v-card-text>
       <v-text-field label="Title" v-model="item.contents.title"/>
       <v-textarea label="Content" v-model="item.contents.message"/>
-
+      
     </v-card-text>
     <v-card-actions>
       <v-btn @click="save">{{ buttonSave }}</v-btn>
@@ -16,13 +16,18 @@
   import sv from '../../mixins/seravault/encryption'
   import { Items } from '../../../api/collections/items/shared'
   import { Random } from 'meteor/random'
+  //import { Wysiwyg } from '../../components/fields/Wysiwyg.vue'
   export default {
     data: function() {
       return {
         item: {},
         title: "",
-        buttonSave: ""
+        buttonSave: "",
+         
       };
+    },
+    components: {
+      
     },
     meteor: {      
       async loadItem() {
