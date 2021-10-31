@@ -26,6 +26,9 @@ import './auth/meteor-accounts'
 /*-------- Seravault --------------*/
 import './seravault'
 
+/*-------- File Upload -------------*/
+import './files'
+
 /*--------  SSR  --------*/
 
 import { VueSSR } from 'meteor/akryum:vue-ssr'

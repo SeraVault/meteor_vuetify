@@ -80,7 +80,7 @@ const svEnc = {
   },
 
   async decryptItem(item, privateKey) {  
-    console.log(item)          
+    //console.log(item)          
     var keyData = item.keys.filter(key => {
       return key.userId == Meteor.userId()
     })

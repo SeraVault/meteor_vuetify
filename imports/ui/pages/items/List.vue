@@ -80,8 +80,7 @@ export default {
 
   },
   activated() {
-    var vm = this
-    
+    var vm = this    
     Items.find().observe({
       added: async function(item){
         var privateKey = await vm.getUserPrivateKey()

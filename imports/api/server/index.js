@@ -7,3 +7,4 @@
 
 /*--------  Import all collections to server  --------*/
 import './collections'
+import './methods'
