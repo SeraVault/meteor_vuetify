@@ -53,7 +53,8 @@ export default {
   meteor: {
       $subscribe: {
         "items.get.all": [],
-        "keys.get.all": []
+        "keys.get.all": [],
+        "files.get.all": []
       },
       theme() {
         return Meteor.user()?.profile.theme || false

@@ -14,14 +14,14 @@ import {
 } from './schemas'
 Meteor.methods({
   "keys.upsert"(item){
-    try {
+    try {      
       assert(!!item, "No Object received for upsert.")
       item.created = item.created || new Date()
       item.updated = new Date()
       item.lastUpdatedBy = Meteor.userId()
       item.createdBy =  Meteor.userId()
       item.active = item.active !== false ? true : false
-      
+      console.log(item)
       /*--------  Schema Validation  --------*/
       new SimpleSchema(upsertSchema).validate(item);
 
@@ -30,8 +30,7 @@ Meteor.methods({
       
       const ups = Keys.upsert(
         {
-          userId: item.userId,
-          itemId: item.itemId
+          _id: item._id
         },
         item,
         {

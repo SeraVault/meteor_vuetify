@@ -8,6 +8,7 @@ meteor-base@1.4.0             # Packages every Meteor app needs to have
 mobile-experience@1.1.0       # Packages for a great mobile UX
 mongo@1.11.0                   # The database Meteor supports right now
 reactive-var@1.0.11            # Reactive variable for tracker
+msavin:mongol
 
 standard-minifier-css@1.7.2   # CSS minifier run for production mode
 standard-minifier-js@2.6.0    # JS minifier run for production mode
@@ -24,6 +25,7 @@ akryum:vue-component
 meteortesting:mocha               # A package for writing and running your meteor app and package tests with mocha
 johanbrook:publication-collector  # Test a Meteor publication by collecting its output
 
+
 hwillson:stub-collections
 jquery
 accounts-base@1.9.0
@@ -36,4 +38,4 @@ dburles:factory
 akryum:vue-ssr
 ostrio:meteor-root
 accounts-password
-msavin:mongol
+

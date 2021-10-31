@@ -11,6 +11,9 @@
 
 import './vueMeteorTracker' // Vue Meteor Tracker. !Awesome
 import './vueMeta' // Vue Meta. !Awesome
+import './masks'
+import './asyncComputed'
+//import './tiptap'
 /*= End of Imports =*/
 /*=============================================<<<<<*/
 
@@ -18,4 +21,4 @@ export {default as vuetify} from './vuetify'
 export {default as router} from './router'
 export {default as store} from './store'
 export {default as i18n} from './i18n'
-//export {default as tiptap} from './tiptap'
+

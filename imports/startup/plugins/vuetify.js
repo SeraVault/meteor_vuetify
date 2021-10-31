@@ -3,6 +3,8 @@ import '@mdi/font/css/materialdesignicons.min.css' // Ensure you are using css-l
 
 import minifyTheme from 'minify-css-string'
 
+
+
 /*--------  The magic goes here  --------*/
 
 // Use this import while developing

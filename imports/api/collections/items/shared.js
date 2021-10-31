@@ -43,6 +43,28 @@ Meteor.methods({
     }
     
   },
+  "items.insert"(item){
+    try {
+      assert(!!item, "No Object received for upsert.")
+      item.created = item.created || new Date()
+      item.updated = new Date()
+      item.lastUpdatedBy = Meteor.userId()
+      item.createdBy =  Meteor.userId()
+      item.active = item.active !== false ? true : false
+      
+      /*--------  Schema Validation  --------*/
+      new SimpleSchema(upsertSchema).validate(item);
+
+      
+      /*--------  Query  --------*/
+      
+      const ups = Items.insert(item)
+      return ups
+    } catch (error) {
+      throw new Meteor.Error('400', error);
+    }
+    
+  },
   "items.delete"(_id){
     try {
       assert(!!_id, "No _id received for delete.")

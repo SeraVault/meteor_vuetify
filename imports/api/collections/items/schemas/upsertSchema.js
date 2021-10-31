@@ -52,9 +52,14 @@ export default {
   },
   'recipients.$': {
     type: String
-  }
-
-  
+  },
+  keys: {
+    type: Array
+  },
+  'keys.$': {
+    type: Object,
+    blackbox: true
+  }  
   /*SERAVAULT END*/
   
 }

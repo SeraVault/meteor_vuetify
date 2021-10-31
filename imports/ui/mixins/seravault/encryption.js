@@ -57,24 +57,35 @@ const svEnc = {
     privateKeyObject = await WebCrypto.importPrivateKeyRSA(privateKey); 
     return privateKeyObject
   },
-
-  async encryptItem(item, contacts) {    
-    const key = await WebCrypto.genAESKey(extractable = true, mode = 'AES-GCM', keySize = 256)    
-    const exportedKey = await WebCrypto.exportKey(key)      
-    item.contents = await WebCrypto.encrypt(key, item.contents)    
-    item.recipients = [Meteor.userId()]
-    contacts.forEach(async contact => {
-      const userPublicKey = await WebCrypto.importPublicKeyRSA(contact.publicKey)       
-      const encryptedKey =  await WebCrypto.encryptRSA(userPublicKey, exportedKey)
-      const data = {itemId: item._id, userId: contact.userId, key: encryptedKey }      
-      Meteor.call('keys.upsert', data )           
-    })    
-    return item
+  
+  async generateAesKey() {
+    return await WebCrypto.genAESKey(extractable = true, mode = 'AES-GCM', keySize = 256) 
   },
 
-  async decryptItem(item, privateKey) {      
-    var keyData = Keys.findOne({itemId: item._id, userId: Meteor.userId()})    
-    const aesKey = await WebCrypto.decryptRSA(privateKey, keyData.key)
+  async encryptItem(item, contacts) {        
+    const key = await this.generateAesKey() 
+    const exportedKey = await WebCrypto.exportKey(key)      
+    item.contents = await WebCrypto.encrypt(key, item.contents)    
+    item.keys = []  
+    for (let contact in contacts) {      
+      const userPublicKey = await WebCrypto.importPublicKeyRSA(contacts[contact].publicKey)       
+      const encryptedKey =  await WebCrypto.encryptRSA(userPublicKey, exportedKey)      
+      item.keys.push({userId: contacts[contact].userId, key: encryptedKey})        
+    }
+    return item
+  },
+  
+  async encryptFileChunk(aesKey, chunk) {
+    return await WebCrypto.encrypt(aesKey, chunk)
+  },
+
+  async decryptItem(item, privateKey) {  
+    console.log(item)          
+    var keyData = item.keys.filter(key => {
+      return key.userId == Meteor.userId()
+    })
+    const myKeyData = keyData[0]
+    const aesKey = await WebCrypto.decryptRSA(privateKey, myKeyData.key)
     const importedAesKey = await WebCrypto.importKey(Object.values(aesKey))    
     item.contents = await WebCrypto.decrypt(importedAesKey, item.contents) 
     return item
@@ -87,8 +98,6 @@ const svEnc = {
     catch (error) {
       return {error: true, message: error}
     }
-    
-    
   }
 };
 
