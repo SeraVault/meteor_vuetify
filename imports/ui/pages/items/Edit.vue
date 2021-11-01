@@ -19,7 +19,7 @@
       />
       <file-upload :value="fileUploads" @change="fileUploads = $event" />
       <v-list v-for="file in item.contents.files" :key="file.id">
-        <v-list-item-content>Name: {{file.name}}</v-list-item-content>
+        <v-list-item-content>Name: {{ file.name }}</v-list-item-content>
       </v-list>
       <v-text-field label="String" v-model="item.contents.string" />
     </v-card-text>
@@ -48,8 +48,7 @@ export default {
       },
       title: "",
       buttonSave: "",
-      fileUploads: [],
-      filesSaved: []
+      fileUploads: []
     };
   },
   components: {
@@ -59,62 +58,60 @@ export default {
     FileUpload
   },
   meteor: {
-    
+
   },
   methods: {
     async save() {
       var item = this.item
       var user = Meteor.user()
       var contacts = [{userId: user._id, publicKey: user.profile.publicKey}]
+      
       if (!item.contents.files) {
         item.contents.files = []
       }
-      await this.processFiles()
+      const filesMeta = await this.processFiles()
+      item.contents.files.push(...filesMeta)
       const itemEncrypted = await sv.encryptItem(item, contacts)
-      
+      this.fileUploads = []
+
       if (this.$route.params._id)
         Meteor.call('items.upsert', itemEncrypted)
       else
         Meteor.call('items.insert', itemEncrypted)
 
-      this.$router.push({name: "itemList"})
+    this.$router.push({name: "itemList"})
     },
-    uploadFile(file) {
-      return new Promise((resolve, reject) => {
-        var reader = new FileReader();
+    async processFiles() {
+        var files = []
+        for (file of this.fileUploads) {
+          const result = await this.readFile(file)
+          console.log(result)
+          files.push(result)
+        }   
+        console.log(files)     
+        return files
+    },
+    readFile(file) {
+      return new Promise(function(resolve, reject){
+        var reader = new FileReader()
         reader.onload = function(fileLoadEvent) {
-            const id = Random.id()
-            Meteor.call('file-upload', id, reader.result, function(error) {
-              if (error) {
-                console.log(error)
-              }
-              else {                                
-                const fileMeta = {id: id, name: file.name, lastModified: file.lastModified, size: file.size, type: file.type, key: "key"}                
-                resolve(fileMeta)
-              }
-            })
+          const id = Random.id()
+          Meteor.call('file-upload', id, reader.result, function(error) {
+            if (error) {
+              reject(error)
+            }
+            else {
+              const fileMeta = {id: id, name: file.name, lastModified: file.lastModified, size: file.size, type: file.type, key: "key"}              
+              resolve(fileMeta)
+            }
+          })
         }
         reader.onerror = (error) => {
-          console.log(error)
+          reject(error)
         }
-        reader.readAsBinaryString(file)       
+        reader.readAsBinaryString(file)
       })
     },
-    processFiles() {
-      return new Promise((resolve, reject) => {
-        if (!this.item.contents.files) {
-          this.item.contents.files = []
-        }
-        const result = this.fileUploads.forEach(async file => {
-          const fileMeta = await this.uploadFile(file)
-          console.log(fileMeta)
-          this.item.contents.files.push(fileMeta)
-        })
-        resolve(result)
-        this.fileUploads = []
-      })
-    },
-    
     getUserPrivateKey() {
       var privateKey = sv.getUserPrivateKeyObject(this.$store.state.privateKey)
       return privateKey
@@ -122,8 +119,10 @@ export default {
     tmp(value) {
       console.log(value)
     }
+
   },
   async activated() {
+    this.fileUploads = []
     if (this.$route.params._id){
       var encryptedItem = Items.findOne(this.$route.params._id)
       if (encryptedItem) {
