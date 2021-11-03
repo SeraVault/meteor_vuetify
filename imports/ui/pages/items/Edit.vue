@@ -65,7 +65,7 @@ export default {
       var item = this.item
       var user = Meteor.user()
       var contacts = [{userId: user._id, publicKey: user.profile.publicKey}]
-      
+
       if (!item.contents.files) {
         item.contents.files = []
       }
@@ -84,33 +84,38 @@ export default {
     async processFiles() {
         var files = []
         for (file of this.fileUploads) {
-          const result = await this.readFile(file)
+          const id = Random.id()
+          const fileMeta = {id: id, name: file.name, lastModified: file.lastModified, size: file.size, type: file.type, key: "key"}
+          console.log(file)
+          file.name = id          
+          //const result = await this.readFile(file)
+          const result = await this.uploadFile(file)
           console.log(result)
-          files.push(result)
-        }   
-        console.log(files)     
+          files.push(fileMeta)
+        }
         return files
     },
-    readFile(file) {
-      return new Promise(function(resolve, reject){
-        var reader = new FileReader()
-        reader.onload = function(fileLoadEvent) {
-          const id = Random.id()
-          Meteor.call('file-upload', id, reader.result, function(error) {
+    uploadFile(file) {
+      new Promise((resolve, reject) => {
+        const upload = Files.insert({
+          file: file,
+          chunkSize: 'dynamic'
+          }, false);
+
+          upload.on('start', function () {
+            //template.currentUpload.set(this);
+          });
+
+          upload.on('end', function (error, fileObj) {
             if (error) {
               reject(error)
+            } else {
+              resolve(upload)
             }
-            else {
-              const fileMeta = {id: id, name: file.name, lastModified: file.lastModified, size: file.size, type: file.type, key: "key"}              
-              resolve(fileMeta)
-            }
-          })
-        }
-        reader.onerror = (error) => {
-          reject(error)
-        }
-        reader.readAsBinaryString(file)
-      })
+            //template.currentUpload.set(false);
+          });
+          upload.start();
+    })
     },
     getUserPrivateKey() {
       var privateKey = sv.getUserPrivateKeyObject(this.$store.state.privateKey)
